@@ -1,4 +1,4 @@
-# 🏥 MediTrack - Enterprise Hospital Management System
+# 🏥 MediCore - Enterprise Hospital Management System
 
 A secure, role-based hospital management backend built with Node.js, Express, and PostgreSQL. Features granular RBAC with 9+ user roles (Super Admin, Hospital Admin, Department Head, Doctor, Nurse, Pharmacist, Lab Technician, Receptionist, Billing Staff), HIPAA-compliant audit trails, and real-time notifications using PostgreSQL LISTEN/NOTIFY.
 
