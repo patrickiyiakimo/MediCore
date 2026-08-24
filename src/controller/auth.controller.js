@@ -41,48 +41,11 @@ const registerUser = async (req, res) => {
 
         const userId = newUser.rows[0].UUID;
 
-            // Create tokens
-            const accessToken = jwt.sign(
+        res.status(201).json({
+        message: "User registered successfully",
+        data: newUser.rows[0]
+        });
 
-            { UUID: userId },
-            process.env.JWT_SECRET,
-            { expiresIn: "15m" }
-
-            );
-
-            const refreshToken = jwt.sign(
-
-            { UUID: userId },
-            process.env.REFRESH_TOKEN_SECRET,
-            { expiresIn: "7d" }
-
-            );
-
-            // Set cookies
-            res.cookie("access_token", accessToken, {
-
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            // secure: false,          // disable secure locally for testing
-            sameSite: "strict",
-            maxAge: 15 * 60 * 1000
-
-            });
-
-            res.cookie("refresh_token", refreshToken, {
-
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            // secure: false,          // disable secure locally for testing
-            sameSite: "strict",
-            maxAge: 7 * 24 * 60 * 60 * 1000
-
-            });
-
-    res.status(201).json({
-      message: "User registered successfully",
-      data: newUser.rows[0]
-    });
     } catch (error) {
 
         console.error(error);
@@ -91,3 +54,5 @@ const registerUser = async (req, res) => {
 
     }
 }
+
+module.exports = { registerUser };
