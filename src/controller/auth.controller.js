@@ -7,7 +7,7 @@ const registerUser = async (req, res) => {
     // Destructure the request body to get the user details
     const { firstName, lastName, email, phoneNumber, password, confirmPassword } = req.body;
 
-    if ( !firstName || !lastName || !email ||!phoneNumber, !password, !confirmPassword ){
+    if ( !firstName || !lastName || !email || !phoneNumber || !password || !confirmPassword ){
 
         return res.status(400).json({ message: "All fields are required" });
 
@@ -38,8 +38,6 @@ const registerUser = async (req, res) => {
             "INSERT INTO users ( firstName, lastName, email, password ) VALUES ($1, $2, $3, $4 ) RETURNING UUID, firstName, lastName, email", [ firstName, lastName, email, hashedPassword]
         
         )
-
-        const userId = newUser.rows[0].UUID;
 
         res.status(201).json({
         message: "User registered successfully",
