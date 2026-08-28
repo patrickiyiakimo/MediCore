@@ -11,7 +11,6 @@ This document defines the architectural principles and folder structure for the 
 - **Package Manager**: npm or yarn
 
 
-
 ## 🏗️ Root Directory Structure
 
 
