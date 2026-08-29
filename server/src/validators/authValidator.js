@@ -1,17 +1,5 @@
 const Joi = require("joi");
 
-const ROLES = [
-  "super_admin",
-  "hospital_admin",
-  "department_head",
-  "doctor",
-  "nurse",
-  "pharmacist",
-  "lab_technician",
-  "receptionist",
-  "billing_staff",
-];
-
 /**
  * Joi schemas for authentication requests.
  */
@@ -27,10 +15,6 @@ const registerSchema = Joi.object({
     .valid(Joi.ref("password"))
     .required()
     .messages({ "any.only": "Passwords do not match" }),
-  role: Joi.string()
-    .valid(...ROLES)
-    .default("staff")
-    .optional(),
 });
 
 const loginSchema = Joi.object({

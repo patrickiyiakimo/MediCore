@@ -8,6 +8,7 @@ const {
   verifyRefreshToken,
 } = require("../utils/jwt");
 const env = require("../config/env");
+const ROLES = require("../constants/roles");
 
 const SALT_ROUNDS = 10;
 

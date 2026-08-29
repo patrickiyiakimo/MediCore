@@ -1,7 +1,7 @@
 import { useAuth } from "../contexts/AuthContext";
 import Card from "../shared/Card";
 import { ROLE_LABELS } from "../constants/roles";
-import { IsLoading } from "../components/LoadingState";
+import IsLoading from "../components/LoadingState";
 
 export default function DashboardPage() {
   const { user } = useAuth();

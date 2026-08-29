@@ -21,6 +21,34 @@ const findById = async (id) => {
   return result.rows[0] || null;
 };
 
+const listUsers = async ({ limit = 20, offset = 0 } = {}) => {
+  const safeLimit = Math.min(Number(limit) || 20, 100);
+  const safeOffset = Math.max(Number(offset) || 0, 0);
+
+  const [dataResult, countResult] = await Promise.all([
+    pool.query(
+      `SELECT id, first_name, last_name, email, phone_number, role, created_at
+       FROM users
+       WHERE deleted_at IS NULL
+       ORDER BY created_at DESC
+       LIMIT $1 OFFSET $2`,
+      [safeLimit, safeOffset]
+    ),
+    pool.query(
+      "SELECT COUNT(*)::int AS total FROM users WHERE deleted_at IS NULL"
+    ),
+  ]);
+
+  return {
+    data: dataResult.rows,
+    meta: {
+      total: countResult.rows[0].total,
+      limit: safeLimit,
+      offset: safeOffset,
+    },
+  };
+};
+
 const create = async (userData) => {
   const {
     firstName,
@@ -28,7 +56,7 @@ const create = async (userData) => {
     email,
     phoneNumber,
     password,
-    role = "staff",
+    role,
   } = userData;
 
   const result = await pool.query(
@@ -46,4 +74,5 @@ module.exports = {
   findByEmail,
   findById,
   create,
+  listUsers,
 };
