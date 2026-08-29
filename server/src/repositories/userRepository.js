@@ -59,12 +59,22 @@ const create = async (userData) => {
     role,
   } = userData;
 
+  const columns = ["first_name", "last_name", "email", "phone_number", "password"];
+  const values = [firstName, lastName, email, phoneNumber, password];
+
+  if (role) {
+    columns.push("role");
+    values.push(role);
+  }
+
+  const placeholders = columns.map((_, i) => `$${i + 1}`);
+
   const result = await pool.query(
     `INSERT INTO users
-       (first_name, last_name, email, phone_number, password, role)
-     VALUES ($1, $2, $3, $4, $5, $6)
+       (${columns.join(", ")})
+     VALUES (${placeholders.join(", ")})
      RETURNING id, first_name, last_name, email, phone_number, role`,
-    [firstName, lastName, email, phoneNumber, password, role]
+    values
   );
 
   return result.rows[0];

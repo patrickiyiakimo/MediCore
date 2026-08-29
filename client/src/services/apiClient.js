@@ -1,8 +1,8 @@
 import axios from "axios";
-import { API_BASE_URL } from "../constants/API_ENDPOINTS";
+import { API_ENDPOINTS } from "../constants/API_ENDPOINTS";
 
 const apiClient = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: "",
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -20,7 +20,7 @@ apiClient.interceptors.response.use(
     ) {
       original._retry = true;
       try {
-        await apiClient.post("/auth/refresh");
+        await apiClient.post(API_ENDPOINTS.AUTH.REFRESH);
         return apiClient(original);
       } catch {
         window.location.href = "/login";
