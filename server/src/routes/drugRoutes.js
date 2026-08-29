@@ -1,32 +1,34 @@
 const express = require("express");
 const router = express.Router();
 
-const userController = require("../controllers/userController");
-const userValidator = require("../validators/userValidator");
+const drugController = require("../controllers/drugController");
+const drugValidator = require("../validators/drugValidator");
 const validate = require("../middlewares/validate");
 const authenticate = require("../middlewares/authMiddleware");
 const requireRole = require("../middlewares/roleMiddleware");
 const ROLES = require("../constants/roles");
 
-const adminRoles = [
+const staffRoles = [
   ROLES.SUPER_ADMIN,
   ROLES.HOSPITAL_ADMIN,
-  ROLES.DEPARTMENT_HEAD,
+  ROLES.PHARMACIST,
+  ROLES.DOCTOR,
 ];
 
 router.get(
   "/",
   authenticate,
-  requireRole(...adminRoles),
-  userController.listUsers
+  requireRole(...staffRoles),
+  validate(drugValidator.listQuerySchema, "query"),
+  drugController.listDrugs
 );
 
-router.patch(
-  "/:id/role",
+router.post(
+  "/",
   authenticate,
-  requireRole(ROLES.SUPER_ADMIN),
-  validate(userValidator.updateRoleSchema),
-  userController.updateUserRole
+  requireRole(...staffRoles),
+  validate(drugValidator.createSchema),
+  drugController.createDrug
 );
 
 module.exports = router;

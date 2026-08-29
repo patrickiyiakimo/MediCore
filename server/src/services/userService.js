@@ -1,10 +1,15 @@
 const userRepository = require("../repositories/userRepository");
+const ApiError = require("../utils/ApiError");
+const messages = require("../constants/messages");
 
-/**
- * Business logic for user management.
- */
 const listUsers = async ({ limit = 20, offset = 0 }) => {
   return userRepository.listUsers({ limit, offset });
 };
 
-module.exports = { listUsers };
+const updateUserRole = async (id, role) => {
+  const updated = await userRepository.updateRole(id, role);
+  if (!updated) throw ApiError.notFound(messages.USER_NOT_FOUND);
+  return updated;
+};
+
+module.exports = { listUsers, updateUserRole };

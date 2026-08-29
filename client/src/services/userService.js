@@ -7,4 +7,9 @@ export const userService = {
       params: { limit, offset },
     }).then((res) => res.data);
   },
+  updateRole(id, role) {
+    return apiClient
+      .patch(API_ENDPOINTS.USERS.UPDATE_ROLE(id), { role })
+      .then((res) => res.data);
+  },
 };

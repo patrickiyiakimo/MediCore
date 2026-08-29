@@ -80,9 +80,20 @@ const create = async (userData) => {
   return result.rows[0];
 };
 
+const updateRole = async (id, role) => {
+  const result = await pool.query(
+    `UPDATE users SET role = $2
+     WHERE id = $1 AND deleted_at IS NULL
+     RETURNING id, first_name, last_name, email, phone_number, role`,
+    [id, role]
+  );
+  return result.rows[0] || null;
+};
+
 module.exports = {
   findByEmail,
   findById,
   create,
   listUsers,
+  updateRole,
 };
