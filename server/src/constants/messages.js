@@ -6,7 +6,7 @@ module.exports = {
   REQUIRED_FIELDS: "All required fields must be provided",
   INVALID_CREDENTIALS: "Invalid email or password",
 
-  PASSWORD_MISMATCH: "Passwords do not match",
+  PASSWORD_MISMATCH: "Invalid email or password",
   USER_EXISTS: "User already exists",
   USER_CREATED: "User registered successfully",
   USER_NOT_FOUND: "User not found",

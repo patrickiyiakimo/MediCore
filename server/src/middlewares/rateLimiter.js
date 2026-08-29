@@ -4,12 +4,12 @@ const errorCodes = require("../constants/errorCodes");
 
 /**
  * Per-IP rate limiting middleware.
- * Default window: 1 minute, max 100 requests per IP.
+ * Default window: 1 minute, max 10 requests per IP.
  */
 const createRateLimiter = (options = {}) =>
   rateLimit({
     windowMs: options.windowMs || 60 * 1000,
-    max: options.max || 100,
+    max: options.max || 10,
     message: {
       success: false,
       message: options.message || messages.RATE_LIMITED,
