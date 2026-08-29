@@ -1,0 +1,12 @@
+/**
+ * Standard error codes returned in the API error response body.
+ */
+module.exports = {
+  VALIDATION_ERROR: "VALIDATION_ERROR",
+  UNAUTHORIZED: "UNAUTHORIZED",
+  FORBIDDEN: "FORBIDDEN",
+  NOT_FOUND: "NOT_FOUND",
+  CONFLICT: "CONFLICT",
+  RATE_LIMITED: "RATE_LIMITED",
+  INTERNAL_SERVER_ERROR: "INTERNAL_SERVER_ERROR",
+};

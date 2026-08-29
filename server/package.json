@@ -1,11 +1,13 @@
 {
-  "name": "medicore",
+  "name": "medicore-server",
   "version": "1.0.0",
-  "description": "Hospital Management System with RBAC ( Role Based Access Control )",
-  "main": "index.js",
+  "description": "MediCore hospital management backend API",
+  "main": "src/server.js",
+  "type": "commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon index.js"
+    "start": "node src/server.js",
+    "start:dev": "nodemon src/server.js",
+    "test": "jest"
   },
   "author": "Patrick Iyiakimo",
   "license": "ISC",
@@ -15,6 +17,7 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "express-rate-limit": "^7.4.1",
     "helmet": "^8.3.0",
     "joi": "^18.2.5",
     "jsonwebtoken": "^9.0.3",
@@ -22,6 +25,7 @@
     "pg": "^8.23.0"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
     "nodemon": "^3.1.14"
   }
 }
